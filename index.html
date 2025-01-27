@@ -15,93 +15,101 @@
   <body>
     <div class="dashboard">
       <h1>General Knowledge Quiz</h1>
-      <div class="category-list">
-        <div class="category-heading">
-          <span class="category-icon-span">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="category-icon"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"
-              />
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 6h.008v.008H6V6Z"
-              />
-            </svg>
-          </span>
-          <h2 class="category-head" id="science-section">
-            Science and Technology
-          </h2>
+      <div class="selection-options">
+        <div class="category-list" id="category-list">
+          <div class="category-heading">
+            <span class="category-icon-span">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="category-icon"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 6h.008v.008H6V6Z"
+                />
+              </svg>
+            </span>
+            <h2 class="category-head" id="science-section">
+              Science and Technology
+            </h2>
+          </div>
+          <div class="categoryItems" id="science-link-list"></div>
+          <div class="category-heading">
+            <span class="category-icon-span">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="category-icon"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 6h.008v.008H6V6Z"
+                />
+              </svg>
+            </span>
+            <h2 class="category-head" id="entertainment-section">
+              Entertainment
+            </h2>
+          </div>
+          <div class="categoryItems" id="entertainment-link-section"></div>
+          <div class="category-heading">
+            <span class="category-icon-span">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="category-icon"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 6h.008v.008H6V6Z"
+                />
+              </svg>
+            </span>
+            <h2 class="category-head" id="science-section">Others</h2>
+          </div>
+          <div class="categoryItems" id="others-link-section"></div>
         </div>
-        <a class="category-item" href="">
-          <span class="category-title">Physics</span>
-          <span class="category-title-icon"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="size-6"
-              class="category-title-icon"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="m8.25 4.5 7.5 7.5-7.5 7.5"
-              />
-            </svg>
-          </span>
-        </a>
-        <a class="category-item" href="quiz.html ">
-          <span class="category-title">Chemistry</span>
-          <span class="category-title-icon"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="size-6"
-              class="category-title-icon"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="m8.25 4.5 7.5 7.5-7.5 7.5"
-              />
-            </svg>
-          </span>
-        </a>
-        <a class="category-item" href="">
-          <span class="category-title">Biology</span>
-          <span class="category-title-icon"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="size-6"
-              class="category-title-icon"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="m8.25 4.5 7.5 7.5-7.5 7.5"
-              />
-            </svg>
-          </span>
-        </a>
+        <div class="changes-options">
+          <div class="box">
+            <select id="difficulty">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+            <select id="type" class="box2">
+              <option value="multiple">Multiple Choice</option>
+              <option value="boolean">True / False</option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
     <script type="module" src="script.js"></script>
