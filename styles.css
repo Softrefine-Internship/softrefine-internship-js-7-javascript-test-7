@@ -1,1 +1,72 @@
 /* write css here */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  background-color: #f0f0f0;
+  font-family: "Inter", serif;
+  font-size: 62.5%;
+  margin: 0;
+  padding: 0;
+}
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+h1 {
+  padding: 2rem;
+  font-size: 3rem;
+  text-align: center;
+  color: black;
+}
+.category-list {
+  width: 70%;
+  background-color: #e6e6fa;
+}
+.category-head {
+  font-size: 2rem;
+  text-align: center;
+  margin: 0.5rem 0;
+}
+.category-icon-span {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+.category-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-weight: bold;
+  stroke-width: 0.1rem;
+}
+.category-item {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.2rem 1rem;
+  padding: 0.5rem 1rem;
+  color: black;
+  font-weight: 600;
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+.category-item:hover {
+  color: white;
+  background-color: rgba(255, 166, 0, 0.705);
+}
+.category-title {
+  font-size: 1rem;
+}
+.category-title-icon {
+  width: 1rem;
+  height: 1rem;
+  font-weight: bold;
+  stroke-width: 0.1rem;
+}
