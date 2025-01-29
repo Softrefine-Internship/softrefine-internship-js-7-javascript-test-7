@@ -1,11 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Quiz Page</title>
+  </head>
+  <body>
     <h1>QUIZ</h1>
-</body>
+    <div class="container">
+      <div class="quiz-container">
+        <h2 class="question-tab">
+          <span class="question-number" id="question">1.</span> What type of dog
+          is "Handsome Dan", The Mascot of Yale University?
+        </h2>
+        <form id="quiz-form" class="form">
+          <div class="options">
+            <label for="option1" class="label" id="op1">
+              <input
+                type="radio"
+                id="option1"
+                name="dog-breed"
+                value="Bulldog"
+              />
+              <span class="checkmark"></span>
+              Bulldog
+            </label>
+          </div>
+          <div class="options">
+            <label for="option2" class="label" id="op2">
+              <input
+                type="radio"
+                id="option2"
+                name="dog-breed"
+                value="Poodle"
+              />
+              <span class="checkmark"></span>
+              Poodle
+            </label>
+          </div>
+          <div class="options">
+            <label for="option3" class="label" id="op3">
+              <input
+                type="radio"
+                id="option3"
+                name="dog-breed"
+                value="Beagle"
+              />
+              <span class="checkmark"></span>
+              Beagle
+            </label>
+          </div>
+          <div class="options">
+            <label class="label" for="option4" id="op4">
+              <input
+                type="radio"
+                id="option4"
+                name="dog-breed"
+                value="Dalmatian"
+              />
+              <span class="checkmark"></span>
+              Dalmatian
+            </label>
+          </div>
+        </form>
+      </div>
+      <div class="cta">
+        <button disabled>Prev</button>
+        <button>Next</button>
+      </div>
+      <div class="pagination">
+        <div class="pagination-btn active">1</div>
+        <div class="pagination-btn">2</div>
+        <div class="pagination-btn">3</div>
+        <div class="pagination-btn">4</div>
+        <div class="pagination-btn">5</div>
+        <div class="pagination-btn">6</div>
+        <div class="pagination-btn">7</div>
+        <div class="pagination-btn">8</div>
+        <div class="pagination-btn">9</div>
+        <div class="pagination-btn">10</div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>

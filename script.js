@@ -12,17 +12,34 @@ const API_CATEGORY_URL = "https://opentdb.com/api_category.php";
 let API_QUESTION_URL =
   "https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=boolean";
 
-const categoriesArr = await getCategory();
-
 const entertainmentArr = [];
 const entertainmentIdArr = [];
 const othersArr = [];
 const othersIdArr = [];
 const scienceArr = [];
 const scienceIdArr = [];
+const questionArr = [];
+let categoriesArr = [];
+const correctAnswerArr = [];
+const userAnswerArr = [];
+const optionsArr = [];
 
-categoriesFiller();
-addTitleToCategoryList();
+// Call the getCategory function within an async function
+(async function initialize() {
+  categoriesArr = await getCategory();
+  if (
+    !document.location.pathname.includes("quiz.html") &&
+    !document.location.pathname.includes("result.html")
+  ) {
+    categoriesFiller();
+    addTitleToCategoryList();
+  }
+  if (document.location.pathname.includes("quiz.html")) {
+    const data = JSON.parse(localStorage.getItem("questions"));
+    console.log(data);
+    getQuestions();
+  }
+})();
 
 // ---------------------------------------------------------------------
 
@@ -30,7 +47,6 @@ async function getCategory() {
   const response = await fetch(API_CATEGORY_URL);
   const data = await response.json();
   const arr = [];
-
   for (let i = 0; i < data.trivia_categories.length; i++) {
     arr.push(data.trivia_categories[i].name);
   }
@@ -61,7 +77,6 @@ function addTitleToCategoryList() {
     const aTag = document.createElement("a");
     aTag.className = "category-item";
     aTag.id = scienceIdArr[i];
-    aTag.href = "quiz.html";
     aTag.addEventListener("click", () => {
       makeAPIcall(aTag.id);
     });
@@ -91,7 +106,6 @@ function addTitleToCategoryList() {
     const element = entertainmentArr[i];
     const aTag = document.createElement("a");
     aTag.className = "category-item";
-    aTag.href = "quiz.html";
     aTag.addEventListener("click", () => {
       makeAPIcall(aTag.id);
     });
@@ -122,7 +136,6 @@ function addTitleToCategoryList() {
     const element = othersArr[i];
     const aTag = document.createElement("div");
     aTag.className = "category-item";
-    aTag.href = "quiz.html";
     aTag.addEventListener("click", () => {
       makeAPIcall(aTag.id);
     });
@@ -151,10 +164,40 @@ function addTitleToCategoryList() {
   }
 }
 
-const makeAPIcall = function (id) {
-  API_QUESTION_URL = `https://opentdb.com/api.php?amount=10&category=${id}&difficulty=${selectDifficulty.value}&type=${selectType.value}`;
+function makeAPIcall(id) {
+  console.log(id);
+  if (id == 19 || id == 13 || (id == 24 && selectType.value == "multiple")) {
+    API_QUESTION_URL = `https://opentdb.com/api.php?amount=10&category=${id}&difficulty=medium&type=${selectType.value}`;
+  } else {
+    API_QUESTION_URL = `https://opentdb.com/api.php?amount=10&category=${id}&difficulty=${selectDifficulty.value}&type=${selectType.value}`;
+  }
   console.log(API_QUESTION_URL);
-  fetch(API_QUESTION_URL).then((res) =>
-    res.json().then((data) => console.log(data))
-  );
-};
+  fetch(API_QUESTION_URL).then(async (res) => {
+    const data = await res.json();
+    console.log(data);
+    localStorage.setItem("questions", JSON.stringify(data.results));
+    window.location.href = "quiz.html";
+  });
+}
+
+function getQuestions() {
+  const data = JSON.parse(localStorage.getItem("questions"));
+  for (let i = 0; i < data.length; i++) {
+    const element = data[i];
+
+    correctAnswerArr.push(element.correct_answer);
+    optionsArr.push(
+      [...element.incorrect_answers, element.correct_answer].sort(
+        () => Math.random() - 0.5
+      )
+    );
+
+    questionArr.push(element.question);
+  }
+  console.log(correctAnswerArr);
+console.log(
+  "https://www.shutterstock.com/image-illustration/digital-question-mark-concept-on-260nw-1670185855.jpg"
+);
+
+  console.log(optionsArr);
+}
