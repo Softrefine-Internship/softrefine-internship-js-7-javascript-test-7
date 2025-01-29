@@ -15,8 +15,11 @@
     <div class="container">
       <div class="quiz-container">
         <h2 class="question-tab">
-          <span class="question-number" id="question">1.</span> What type of dog
-          is "Handsome Dan", The Mascot of Yale University?
+          <span class="question-number" id="question-number">1.</span
+          ><span id="question-span">
+            What type of dog is "Handsome Dan", The Mascot of Yale
+            University?</span
+          >
         </h2>
         <form id="quiz-form" class="form">
           <div class="options">
@@ -26,6 +29,7 @@
                 id="option1"
                 name="dog-breed"
                 value="Bulldog"
+                onchange="optionSelected()"
               />
               <span class="checkmark"></span>
               Bulldog
@@ -38,6 +42,7 @@
                 id="option2"
                 name="dog-breed"
                 value="Poodle"
+                onchange="optionSelected()"
               />
               <span class="checkmark"></span>
               Poodle
@@ -50,6 +55,7 @@
                 id="option3"
                 name="dog-breed"
                 value="Beagle"
+                onchange="optionSelected()"
               />
               <span class="checkmark"></span>
               Beagle
@@ -62,6 +68,7 @@
                 id="option4"
                 name="dog-breed"
                 value="Dalmatian"
+                onchange="optionSelected()"
               />
               <span class="checkmark"></span>
               Dalmatian
@@ -70,11 +77,16 @@
         </form>
       </div>
       <div class="cta">
-        <button disabled>Prev</button>
-        <button>Next</button>
+        <button id="prev-btn" class="disabled" onclick="prevQuestion()">
+          Prev
+        </button>
+        <button class="next-btn" id="next-btn" onclick="nextQuestion()">
+          Next
+        </button>
+        <button class="submit-btn hidden" id="submit-btn">Submit</button>
       </div>
       <div class="pagination">
-        <div class="pagination-btn active">1</div>
+        <div class="pagination-btn" id="">1</div>
         <div class="pagination-btn">2</div>
         <div class="pagination-btn">3</div>
         <div class="pagination-btn">4</div>

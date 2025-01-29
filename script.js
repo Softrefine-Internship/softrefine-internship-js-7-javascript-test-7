@@ -1,4 +1,3 @@
-// script.js
 const categoryList = document.getElementById("category-list");
 const sciencesTopicsListDiv = document.getElementById("science-link-list");
 const entertainmentsTopicsListDiv = document.getElementById(
@@ -7,7 +6,14 @@ const entertainmentsTopicsListDiv = document.getElementById(
 const selectType = document.getElementById("type");
 const selectDifficulty = document.getElementById("difficulty");
 const othersTopicsListDiv = document.getElementById("others-link-section");
+const questionSpan = document.getElementById("question-span");
+const questionNumberSpan = document.getElementById("question-number");
+const paginationDiv = document.getElementsByClassName("pagination");
 
+const option1 = document.getElementById("op1");
+const option2 = document.getElementById("op2");
+const option3 = document.getElementById("op3");
+const option4 = document.getElementById("op4");
 const API_CATEGORY_URL = "https://opentdb.com/api_category.php";
 let API_QUESTION_URL =
   "https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=boolean";
@@ -23,24 +29,28 @@ let categoriesArr = [];
 const correctAnswerArr = [];
 const userAnswerArr = [];
 const optionsArr = [];
-
-// Call the getCategory function within an async function
-(async function initialize() {
+let currentPageNumber = 0;
+initialize();
+async function initialize() {
   categoriesArr = await getCategory();
+
   if (
     !document.location.pathname.includes("quiz.html") &&
     !document.location.pathname.includes("result.html")
   ) {
+    console.log("Hi from home page");
     categoriesFiller();
     addTitleToCategoryList();
   }
   if (document.location.pathname.includes("quiz.html")) {
     const data = JSON.parse(localStorage.getItem("questions"));
-    console.log(data);
     getQuestions();
+    setQuestion();
+    const paginationChildren = Array.from(paginationDiv[0].children);
+    console.log(paginationChildren);
   }
-})();
-
+}
+// initialize();
 // ---------------------------------------------------------------------
 
 async function getCategory() {
@@ -191,13 +201,85 @@ function getQuestions() {
         () => Math.random() - 0.5
       )
     );
-
     questionArr.push(element.question);
   }
-  console.log(correctAnswerArr);
-console.log(
-  "https://www.shutterstock.com/image-illustration/digital-question-mark-concept-on-260nw-1670185855.jpg"
-);
+}
 
-  console.log(optionsArr);
+function setQuestion() {
+  questionNumberSpan.innerHTML = `${currentPageNumber + 1}.`;
+  const currentQuestion = questionArr[currentPageNumber];
+  questionSpan.innerHTML = `${currentQuestion}`;
+  option1.innerHTML = `<input
+                type="radio"
+                id="option1"
+                name="dog-breed"
+                onchange="optionSelected()"
+                value="${optionsArr[currentPageNumber][0]}"
+              />
+              <span class="checkmark"></span>
+              ${optionsArr[currentPageNumber][0]}`;
+  option2.innerHTML = `<input
+                type="radio"
+                id="option2"
+                name="dog-breed"
+                onchange="optionSelected()"
+                value="${optionsArr[currentPageNumber][1]}"
+              />
+              <span class="checkmark"></span>
+              ${optionsArr[currentPageNumber][1]}`;
+  option3.innerHTML = `<input
+                type="radio"
+                onchange="optionSelected()"
+                id="option3"
+                name="dog-breed"
+                value="${optionsArr[currentPageNumber][2]}"
+              />
+              <span class="checkmark"></span>
+              ${optionsArr[currentPageNumber][2]}`;
+  option4.innerHTML = `<input
+                type="radio"
+                id="option4"
+                onchange="optionSelected()"
+                name="dog-breed"
+                value="${optionsArr[currentPageNumber][3]}"
+              />
+              <span class="checkmark"></span>
+              ${optionsArr[currentPageNumber][3]}`;
+}
+function optionSelected() {
+  const options = document.getElementsByName("dog-breed");
+  let selectedOption;
+  for (let i = 0; i < options.length; i++) {
+    const element = options[i];
+    if (element.checked) {
+      selectedOption = element.value;
+    }
+  }
+  userAnswerArr[currentPageNumber] = selectedOption;
+  console.log(userAnswerArr);
+}
+function nextQuestion() {
+  if (currentPageNumber < 9) {
+    currentPageNumber++;
+    setQuestion();
+    document.getElementById("prev-btn").classList.remove("disabled");
+  }
+  if (currentPageNumber === 9) {
+    document.getElementById("next-btn").classList.add("hidden");
+  }
+}
+
+function prevQuestion() {
+  if (currentPageNumber > 0) {
+    if (currentPageNumber <= 9) {
+      document.getElementById("next-btn").classList.remove("hidden");
+      document.getElementById("submit").classList.add("hidden");
+    }
+    currentPageNumber--;
+    setQuestion();
+    document.getElementById("next-btn").classList.remove("disabled");
+  }
+  if (currentPageNumber === 0) {
+    document.getElementById("prev-btn").classList.add("disabled");
+  }
 }
