@@ -16,10 +16,7 @@
       <div class="quiz-container">
         <h2 class="question-tab">
           <span class="question-number" id="question-number">1.</span
-          ><span id="question-span">
-            What type of dog is "Handsome Dan", The Mascot of Yale
-            University?</span
-          >
+          ><span id="question-span">Loading Question</span>
         </h2>
         <form id="quiz-form" class="form">
           <div class="options">
@@ -32,7 +29,6 @@
                 onchange="optionSelected()"
               />
               <span class="checkmark"></span>
-              Bulldog
             </label>
           </div>
           <div class="options">
@@ -45,7 +41,6 @@
                 onchange="optionSelected()"
               />
               <span class="checkmark"></span>
-              Poodle
             </label>
           </div>
           <div class="options">
@@ -58,7 +53,6 @@
                 onchange="optionSelected()"
               />
               <span class="checkmark"></span>
-              Beagle
             </label>
           </div>
           <div class="options">
@@ -71,7 +65,6 @@
                 onchange="optionSelected()"
               />
               <span class="checkmark"></span>
-              Dalmatian
             </label>
           </div>
         </form>
@@ -83,19 +76,53 @@
         <button class="next-btn" id="next-btn" onclick="nextQuestion()">
           Next
         </button>
-        <button class="submit-btn hidden" id="submit-btn">Submit</button>
+        <button
+          class="submit-btn hidden"
+          id="submit-btn"
+          onclick="goToResult() "
+        >
+          Submit
+        </button>
       </div>
       <div class="pagination">
-        <div class="pagination-btn" id="">1</div>
-        <div class="pagination-btn">2</div>
-        <div class="pagination-btn">3</div>
-        <div class="pagination-btn">4</div>
-        <div class="pagination-btn">5</div>
-        <div class="pagination-btn">6</div>
-        <div class="pagination-btn">7</div>
-        <div class="pagination-btn">8</div>
-        <div class="pagination-btn">9</div>
-        <div class="pagination-btn">10</div>
+        <div
+          class="pagination-btn active"
+          id="pg-1"
+          onclick="setPaginationJumping(0)"
+        >
+          1
+        </div>
+        <div class="pagination-btn" id="pg-2" onclick="setPaginationJumping(1)">
+          2
+        </div>
+        <div class="pagination-btn" id="pg-3" onclick="setPaginationJumping(2)">
+          3
+        </div>
+        <div class="pagination-btn" id="pg-4" onclick="setPaginationJumping(3)">
+          4
+        </div>
+        <div class="pagination-btn" id="pg-5" onclick="setPaginationJumping(4)">
+          5
+        </div>
+        <div class="pagination-btn" id="pg-6" onclick="setPaginationJumping(5)">
+          6
+        </div>
+        <div class="pagination-btn" id="pg-7" onclick="setPaginationJumping(6)">
+          7
+        </div>
+        <div class="pagination-btn" id="pg-8" onclick="setPaginationJumping(7)">
+          8
+        </div>
+        <div class="pagination-btn" id="pg-9" onclick="setPaginationJumping(8)">
+          9
+        </div>
+        <div
+          class="pagination-btn"
+          id="pg-10"
+          onclick="setPaginationJumping(9)"
+        >
+          10
+        </div>
       </div>
     </div>
     <script src="script.js"></script>

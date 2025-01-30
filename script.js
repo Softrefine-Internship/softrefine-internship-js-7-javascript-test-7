@@ -9,7 +9,10 @@ const othersTopicsListDiv = document.getElementById("others-link-section");
 const questionSpan = document.getElementById("question-span");
 const questionNumberSpan = document.getElementById("question-number");
 const paginationDiv = document.getElementsByClassName("pagination");
+const loader = document.getElementById("loader");
+// console.log(loader);
 
+const indexDashboard = document.getElementById("index-dashboard");
 const option1 = document.getElementById("op1");
 const option2 = document.getElementById("op2");
 const option3 = document.getElementById("op3");
@@ -19,6 +22,7 @@ let API_QUESTION_URL =
   "https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=boolean";
 
 const entertainmentArr = [];
+let score = 0;
 const entertainmentIdArr = [];
 const othersArr = [];
 const othersIdArr = [];
@@ -28,6 +32,7 @@ const questionArr = [];
 let categoriesArr = [];
 const correctAnswerArr = [];
 const userAnswerArr = [];
+let paginationChildren = [];
 const optionsArr = [];
 let currentPageNumber = 0;
 initialize();
@@ -38,16 +43,72 @@ async function initialize() {
     !document.location.pathname.includes("quiz.html") &&
     !document.location.pathname.includes("result.html")
   ) {
-    console.log("Hi from home page");
+    // console.log("Hi from home page");
     categoriesFiller();
     addTitleToCategoryList();
-  }
-  if (document.location.pathname.includes("quiz.html")) {
-    const data = JSON.parse(localStorage.getItem("questions"));
+  } else if (document.location.pathname.includes("quiz.html")) {
+    JSON.parse(localStorage.getItem("questions"));
     getQuestions();
     setQuestion();
-    const paginationChildren = Array.from(paginationDiv[0].children);
-    console.log(paginationChildren);
+    paginationChildren = Array.from(paginationDiv[0].children);
+    // console.log(paginationChildren);
+    setPagination(0, 0);
+  } else {
+    console.log("Hi there");
+    displayResults();
+    getScore();
+
+    // Set the score on page load
+    document.addEventListener("DOMContentLoaded", function () {
+      const score = displayResults();
+      document.getElementById("scoreValue").textContent = score;
+    });
+    function getScore() {
+      const userAnswers = JSON.parse(localStorage.getItem("userAnswers"));
+      console.log(userAnswers);
+
+      const correctAnswers = JSON.parse(localStorage.getItem("correctAnswers"));
+      console.log(correctAnswers);
+      // score = 0;
+      for (let index = 0; index < 10; index++) {
+        console.log(userAnswers[index] === correctAnswers[index]);
+
+        if (userAnswers[index] === correctAnswers[index]) {
+          score += 1;
+        }
+      }
+      console.log(score);
+      document.getElementById("scoreValue").innerHTML = score;
+    }
+    // Function to display the correct answers and user's answers
+    function displayResults() {
+      // getScore();
+      const userAnswers = JSON.parse(localStorage.getItem("userAnswers"));
+      console.log(userAnswers);
+
+      const correctAnswers = JSON.parse(localStorage.getItem("correctAnswers"));
+      const questionCurrentArr = JSON.parse(localStorage.getItem("questions"));
+      console.log(correctAnswers);
+      const resultsContainer = document.getElementById("results-container");
+      resultsContainer.innerHTML = "";
+      correctAnswers.forEach((answer, index) => {
+        const resultItem = document.createElement("div");
+        resultItem.className = "result-item";
+        resultItem.innerHTML = `
+      <p>Question ${index + 1}:${questionCurrentArr[index].question}</p>
+      <p>Your Answer: ${userAnswers[index] ?? ""}</p>
+      <p>Correct Answer: ${answer}</p>
+    `;
+        resultsContainer.appendChild(resultItem);
+      });
+    }
+
+    // Call displayResults on page load
+    document.addEventListener("DOMContentLoaded", function () {
+      displayResults();
+    });
+
+    // Add event listener to the "Play Again" button
   }
 }
 // initialize();
@@ -82,6 +143,11 @@ function categoriesFiller() {
 }
 
 function addTitleToCategoryList() {
+  sciencesTopicsListDiv.innerText = "";
+  othersTopicsListDiv.innerText = "";
+  loader.classList.add("hidden");
+  indexDashboard.classList.remove("hidden");
+  entertainmentsTopicsListDiv.innerText = "";
   for (let i = 0; i < scienceArr.length; i++) {
     const element = scienceArr[i];
     const aTag = document.createElement("a");
@@ -175,16 +241,16 @@ function addTitleToCategoryList() {
 }
 
 function makeAPIcall(id) {
-  console.log(id);
+  // console.log(id);
   if (id == 19 || id == 13 || (id == 24 && selectType.value == "multiple")) {
     API_QUESTION_URL = `https://opentdb.com/api.php?amount=10&category=${id}&difficulty=medium&type=${selectType.value}`;
   } else {
     API_QUESTION_URL = `https://opentdb.com/api.php?amount=10&category=${id}&difficulty=${selectDifficulty.value}&type=${selectType.value}`;
   }
-  console.log(API_QUESTION_URL);
+  // console.log(API_QUESTION_URL);
   fetch(API_QUESTION_URL).then(async (res) => {
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     localStorage.setItem("questions", JSON.stringify(data.results));
     window.location.href = "quiz.html";
   });
@@ -204,50 +270,31 @@ function getQuestions() {
     questionArr.push(element.question);
   }
 }
-
 function setQuestion() {
   questionNumberSpan.innerHTML = `${currentPageNumber + 1}.`;
   const currentQuestion = questionArr[currentPageNumber];
   questionSpan.innerHTML = `${currentQuestion}`;
-  option1.innerHTML = `<input
-                type="radio"
-                id="option1"
-                name="dog-breed"
-                onchange="optionSelected()"
-                value="${optionsArr[currentPageNumber][0]}"
-              />
-              <span class="checkmark"></span>
-              ${optionsArr[currentPageNumber][0]}`;
-  option2.innerHTML = `<input
-                type="radio"
-                id="option2"
-                name="dog-breed"
-                onchange="optionSelected()"
-                value="${optionsArr[currentPageNumber][1]}"
-              />
-              <span class="checkmark"></span>
-              ${optionsArr[currentPageNumber][1]}`;
-  option3.innerHTML = `<input
-                type="radio"
-                onchange="optionSelected()"
-                id="option3"
-                name="dog-breed"
-                value="${optionsArr[currentPageNumber][2]}"
-              />
-              <span class="checkmark"></span>
-              ${optionsArr[currentPageNumber][2]}`;
-  option4.innerHTML = `<input
-                type="radio"
-                id="option4"
-                onchange="optionSelected()"
-                name="dog-breed"
-                value="${optionsArr[currentPageNumber][3]}"
-              />
-              <span class="checkmark"></span>
-              ${optionsArr[currentPageNumber][3]}`;
+
+  const options = [option1, option2, option3, option4];
+
+  options.forEach((option, index) => {
+    const optionContent = optionsArr[currentPageNumber][index];
+    if (optionContent !== undefined) {
+      option.style.display = "block";
+      option.innerHTML = `
+        <input type="radio" id="option${index + 1}" name="quiz-option"
+          onchange="optionSelected()" value="${optionContent}"
+          ${userAnswerArr[currentPageNumber] === optionContent ? "checked" : ""}
+        />
+        <span class="checkmark"></span> ${optionContent}`;
+    } else {
+      option.style.display = "none"; // Hide the option if not available
+    }
+  });
 }
+
 function optionSelected() {
-  const options = document.getElementsByName("dog-breed");
+  const options = document.getElementsByName("quiz-option");
   let selectedOption;
   for (let i = 0; i < options.length; i++) {
     const element = options[i];
@@ -260,11 +307,13 @@ function optionSelected() {
 }
 function nextQuestion() {
   if (currentPageNumber < 9) {
+    setPagination(currentPageNumber, currentPageNumber + 1);
     currentPageNumber++;
     setQuestion();
     document.getElementById("prev-btn").classList.remove("disabled");
   }
   if (currentPageNumber === 9) {
+    document.getElementById("submit-btn").classList.remove("hidden");
     document.getElementById("next-btn").classList.add("hidden");
   }
 }
@@ -273,8 +322,11 @@ function prevQuestion() {
   if (currentPageNumber > 0) {
     if (currentPageNumber <= 9) {
       document.getElementById("next-btn").classList.remove("hidden");
-      document.getElementById("submit").classList.add("hidden");
+      document.getElementById("submit-btn").classList.add("hidden");
+    } else {
     }
+    setPagination(currentPageNumber, currentPageNumber - 1);
+
     currentPageNumber--;
     setQuestion();
     document.getElementById("next-btn").classList.remove("disabled");
@@ -282,4 +334,39 @@ function prevQuestion() {
   if (currentPageNumber === 0) {
     document.getElementById("prev-btn").classList.add("disabled");
   }
+}
+
+function setPagination(prev, next) {
+  paginationChildren[prev].classList.remove("active");
+  paginationChildren[next].classList.add("active");
+}
+
+function setPaginationJumping(e) {
+  paginationChildren[currentPageNumber].classList.remove("active");
+  paginationChildren[parseInt(e)].classList.add("active");
+  currentPageNumber = parseInt(e);
+  setQuestion();
+
+  if (currentPageNumber === 0) {
+    document.getElementById("prev-btn").classList.add("disabled");
+  } else {
+    document.getElementById("prev-btn").classList.remove("disabled");
+  }
+
+  if (currentPageNumber === 9) {
+    document.getElementById("submit-btn").classList.remove("hidden");
+    document.getElementById("next-btn").classList.add("hidden");
+  } else {
+    document.getElementById("submit-btn").classList.add("hidden");
+    document.getElementById("next-btn").classList.remove("hidden");
+  }
+}
+function goToResult() {
+  localStorage.setItem("userAnswers", JSON.stringify(userAnswerArr));
+  localStorage.setItem("correctAnswers", JSON.stringify(correctAnswerArr));
+  window.location.href = "result.html";
+}
+
+function playNewQuiz() {
+  window.location.href = "index.html";
 }

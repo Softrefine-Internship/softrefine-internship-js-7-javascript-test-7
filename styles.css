@@ -10,6 +10,8 @@ body {
   font-size: 62.5%;
   margin: 0;
   padding: 0rem;
+  height: 100vh;
+  width: 100vw;
 }
 body::-webkit-scrollbar {
   display: none;
@@ -318,10 +320,177 @@ button:disabled {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-} 
+}
 .submit-btn:hover {
   background-color: #c73e0c;
 }
+
+/* ---------------------------------- */
+/* General Reset */
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+/* Body Styling */
+
+.hithere {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Container for the result */
+.container-result {
+  margin: 2rem;
+  max-width: 800px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Results Container (holds individual result items) */
+#results-container {
+  margin-bottom: 20px;
+}
+
+/* Styling for each result item */
+.result-item {
+  background-color: #f9f9f9;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.result-item p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Result Card Styling */
+.result-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #4caf50;
+}
+
+.score {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+#scoreValue {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #4caf50;
+}
+
+.message {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+/* Button Styling */
+.next-btn {
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.next-btn:hover {
+  background-color: #45a049;
+}
+
+.next-btn:active {
+  transform: scale(0.98);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .container-result {
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .score {
+    font-size: 1.3rem;
+  }
+
+  .next-btn {
+    font-size: 1rem;
+    padding: 10px 25px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .score {
+    font-size: 1.2rem;
+  }
+
+  .next-btn {
+    font-size: 0.9rem;
+    padding: 8px 20px;
+  }
+}
+.loader {
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  transform: translate(-50% -50%);
+  /* height: 100vh;
+  width: 100vw; */
+  border: 16px solid #797979; /* Light grey */
+  border-top: 16px solid #61acde; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .hidden {
-  display: block;
+  display: none !important;
 }
