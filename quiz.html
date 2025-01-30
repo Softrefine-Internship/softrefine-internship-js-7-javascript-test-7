@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Quiz Page</title>
+  </head>
+  <body>
+    <h1>QUIZ</h1>
+    <div class="container">
+      <div class="quiz-container">
+        <h2 class="question-tab">
+          <span class="question-number" id="question-number">1.</span
+          ><span id="question-span">Loading Question</span>
+        </h2>
+        <form id="quiz-form" class="form">
+          <div class="options">
+            <label for="option1" class="label" id="op1">
+              <input
+                type="radio"
+                id="option1"
+                name="dog-breed"
+                value="Bulldog"
+                onchange="optionSelected()"
+              />
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <div class="options">
+            <label for="option2" class="label" id="op2">
+              <input
+                type="radio"
+                id="option2"
+                name="dog-breed"
+                value="Poodle"
+                onchange="optionSelected()"
+              />
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <div class="options">
+            <label for="option3" class="label" id="op3">
+              <input
+                type="radio"
+                id="option3"
+                name="dog-breed"
+                value="Beagle"
+                onchange="optionSelected()"
+              />
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <div class="options">
+            <label class="label" for="option4" id="op4">
+              <input
+                type="radio"
+                id="option4"
+                name="dog-breed"
+                value="Dalmatian"
+                onchange="optionSelected()"
+              />
+              <span class="checkmark"></span>
+            </label>
+          </div>
+        </form>
+      </div>
+      <div class="cta">
+        <button id="prev-btn" class="disabled" onclick="prevQuestion()">
+          Prev
+        </button>
+        <button class="next-btn" id="next-btn" onclick="nextQuestion()">
+          Next
+        </button>
+        <button
+          class="submit-btn hidden"
+          id="submit-btn"
+          onclick="goToResult() "
+        >
+          Submit
+        </button>
+      </div>
+      <div class="pagination">
+        <div
+          class="pagination-btn active"
+          id="pg-1"
+          onclick="setPaginationJumping(0)"
+        >
+          1
+        </div>
+        <div class="pagination-btn" id="pg-2" onclick="setPaginationJumping(1)">
+          2
+        </div>
+        <div class="pagination-btn" id="pg-3" onclick="setPaginationJumping(2)">
+          3
+        </div>
+        <div class="pagination-btn" id="pg-4" onclick="setPaginationJumping(3)">
+          4
+        </div>
+        <div class="pagination-btn" id="pg-5" onclick="setPaginationJumping(4)">
+          5
+        </div>
+        <div class="pagination-btn" id="pg-6" onclick="setPaginationJumping(5)">
+          6
+        </div>
+        <div class="pagination-btn" id="pg-7" onclick="setPaginationJumping(6)">
+          7
+        </div>
+        <div class="pagination-btn" id="pg-8" onclick="setPaginationJumping(7)">
+          8
+        </div>
+        <div class="pagination-btn" id="pg-9" onclick="setPaginationJumping(8)">
+          9
+        </div>
+        <div
+          class="pagination-btn"
+          id="pg-10"
+          onclick="setPaginationJumping(9)"
+        >
+          10
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

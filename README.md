@@ -1,6 +1,6 @@
 # Javascript Quiz App
 
-### Project Description
+### Project Descriptio
 
 Create a dynamic and interactive JavaScript quiz application using HTML, CSS, and JavaScript that fetches questions from an API based on user-selected options. The app will consist of three major screens to provide a seamless quiz-taking experience.
 
